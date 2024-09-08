@@ -51,6 +51,7 @@ pipeline {
             steps {
                 dir("./frontend/front-end-app"){
                     bat "dir"
+                    bat "npm install"
                     bat "ng build"
                 }
             }
