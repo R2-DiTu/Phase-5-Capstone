@@ -1,0 +1,28 @@
+h2, h4, p{
+    text-align: center;
+}
+
+.col-3 {
+}
+
+span {
+    color: red;
+}
+
+.table {
+    margin: auto;
+    border: 1px solid gray;
+}
+
+tr {
+    background-color: silver;
+}
+
+.db {
+    margin: 35px auto;
+}
+
+.form-group {
+    text-align: right;
+}
+

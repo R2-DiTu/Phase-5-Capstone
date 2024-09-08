@@ -1,0 +1,58 @@
+<div>
+  <h3>Add Movie</h3>
+
+  <div>
+      <span style="color:red">{{msg}}</span>
+      <form [formGroup]="moviesRef" (ngSubmit)="addMovies()">
+          <label>Movie ID:*</label><br/>
+          <input type="number" formControlName="mid"/><br/>
+          <label>Movie Name:*</label><br/>
+          <input type="text" formControlName="mname"/><br/>
+          <label>Language:*</label><br/>
+          <input type="text" formControlName="language"/><br/>
+          <label>Price:*</label><br/>
+          <input type="number" formControlName="price"/><br/>
+          <label>Qty:*</label><br/>
+          <input type="number" formControlName="qty"/><br/><br/>      
+
+          <input type="submit" value="Add Movie" class="btn btn-success"/>
+          <input type="reset" value="Reset" class="btn btn-info"/>
+
+      </form>
+  </div>
+  <br/><br/>
+  <h4 style="text-align: center;">All Movie Info</h4>
+ <table>
+   <tr>
+      <th>MId</th>
+      <th>MName</th>
+      <th>Language</th>
+      <th>Price</th>
+      <th>Qty</th>
+      
+      <th>Delete</th>
+      <th>Update</th>
+  </tr>
+  <tr *ngFor="let movies of movies">
+      <td>{{movies.mid}}</td>
+      <td>{{movies.mname}}</td>
+      <td>{{movies.language}}</td>
+      <td>{{movies.price}}</td>
+      <td>{{movies.qty}}</td>
+     <td>
+      <a (click)="deleteMovies(movies.mid)">
+          <img src="https://uxwing.com/wp-content/themes/uxwing/download/checkmark-cross/red-x-icon.png"
+          width="20px" height="20px"
+          />
+      </a>
+     </td>
+     <td>
+      <a (click)="updateMovies(movies)">
+          <img src="https://png.pngtree.com/png-vector/20220608/ourmid/pngtree-update-icon-on-white-background-png-image_4915764.png"
+          width="30px" height="30px"
+          />
+      </a>
+     </td>
+  </tr>
+ </table>
+</div>

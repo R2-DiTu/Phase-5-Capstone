@@ -1,0 +1,52 @@
+<div>
+    <div>Cart Info: {{carts.length}}<a (click)="viewCart()">View Cart</a></div>
+
+    <div *ngIf="!payment_flag">
+        <div *ngIf="flag">
+            <h3>Movie Details</h3>
+            <div *ngFor="let movies of movies;let i=index;" class="imageClass">
+                <span>Name : {{movies.mname}} Price : {{movies.price}}</span>
+                <input type="button" value="Add to Cart" (click)="addToCart(movies,i)"/>
+            </div>
+        </div>
+
+      <div *ngIf="!flag">
+        <h4>Cart Details</h4>
+        <table>
+            <tr>
+                <th>MId</th>
+                <th>Movie Name</th>
+                <th>Language</th>
+                <th>Price</th>
+                <th>QTY</th>
+                <th>Increment</th>
+                <th>Decrement</th>
+                <th>Amount</th>
+                <th>Remove</th>
+            </tr>
+            <tr *ngFor="let cart of carts; let i=index;">
+                <td>{{cart.mid}}</td>
+                <td>{{cart.mname}}</td>
+                <td>{{cart.language}}</td>
+                <td>{{cart.price}}</td>
+                <td>{{cart.qty}}</td>
+                <td><a (click)="incrementQty(i)">+</a></td>
+                <td><a (click)="decrementQty(i)">-</a></td>
+                <td>{{cart.price*cart.qty}}</td>
+                <td><a (click)="removeItemFromCart(i)"></a></td>
+            </tr>
+        </table>
+        <span>Total : {{total}}</span>
+        <input type="button" value="Book more movies" (click)="continueShopping()"/>
+        <input type="button" value="Payment" (click)="processedForPayment()"/>
+      </div>  
+    </div>
+
+    <div *ngIf="payment flag">
+        <br>
+        Card Number <input type="number" placeholder="XXXX-XXXX-XXXX"/>
+        PIN <input type="number" placeholder="XXX"/>
+        <input type="button" value="Pay Now" (click)="payment()"/>
+    </div>
+
+</div>

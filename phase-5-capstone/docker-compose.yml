@@ -1,0 +1,68 @@
+version: '3.8'
+services:
+  mysql-service:
+    image: mysql:8.0
+    container_name: mysql_container
+    environment:
+      - MYSQL_ROOT_PASSWORD=password
+      - MYSQL_DATABASE=moviesdb
+    ports:
+      - 3307:3306
+    networks:
+      - private
+    volumes:
+      - db:/var/lib/mysql
+    restart: always
+  eureka-server:
+    build: ./backend/eureka-server/eureka-server/
+    container_name: eureka_container
+    ports:
+      - 8761:8761
+    networks:
+      - public 
+    restart: always
+  micro-service-app:
+    build: ./backend/movies-micro-service-app/movies-micro-service-app/
+    container_name: movies_micro_service_container
+    environment:
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka-server:8761/eureka/
+    ports:
+      - 9090:9090
+    depends_on:
+      - mysql-service
+      - eureka-server
+    networks:
+      - private
+      - public
+    restart: always
+  login-app-micro-service:
+    build: ./backend/Login-app-micro-service/Login-app-micro-service/
+    container_name: login_app_micro_service_container
+    environment:
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka-server:8761/eureka/
+    ports:
+      - 9191:9191
+    depends_on:
+      - mysql-service
+      - eureka-server
+    networks:
+      - private
+      - public
+    restart: always
+  angular-service:
+    build: ./frontend/front-end-app/
+    container_name: angular_container
+    ports:
+      - 80:80
+    networks:
+      - public  
+networks:
+  private :
+    name : spring-boot-mysql-network 
+  public:
+    name : angular-and-spring-boot-network
+volumes:
+  db:
+   driver: local
+   
+  

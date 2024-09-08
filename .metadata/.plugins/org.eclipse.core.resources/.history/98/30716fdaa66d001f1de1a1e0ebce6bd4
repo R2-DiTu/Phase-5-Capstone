@@ -1,0 +1,40 @@
+package com.service;
+
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.entity.Movies;
+import com.repository.MoviesRepository;
+
+@Service
+public class MoviesService {
+
+	@Autowired
+	MoviesRepository studentRepository;
+	
+	public List<Movies> findAllStudent() {
+		return studentRepository.findAll();
+	}
+	
+	public String storeRecord(List<Movies> listOfStudent) {
+		studentRepository.saveAll(listOfStudent);
+		return "Record stored";
+	}
+	
+	public long getStudentCount() {
+		return studentRepository.count();
+	}
+	
+	public String addStudent(Movies student) {
+		Optional<Movies> result = studentRepository.findById(student.getSid());
+		if(result.isPresent()) {
+			return "Student already present with id as "+student.getSid();
+		}else {
+			studentRepository.save(student);
+			return "Student record stored successfully";
+		}
+	}
+}
