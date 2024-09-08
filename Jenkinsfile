@@ -28,5 +28,32 @@ pipeline {
                 }
             }
         }
+
+        stage('Build the Login Service App') {
+            steps {
+                dir("./backend/Login-app-micro-service/Login-app-micro-service/"){
+                    bat "dir"
+                    bat "mvn clean package"
+                }
+            }
+        }
+
+        stage('Build the Movies Microservice App') {
+            steps {
+                dir("./backend/movies-micro-service-app/movies-micro-service-app"){
+                    bat "dir"
+                    bat "mvn clean package"
+                }
+            }
+        }
+
+        stage('Build the Angular Front End') {
+            steps {
+                dir("./frontend/front-end-app"){
+                    bat "dir"
+                    bat "ng build"
+                }
+            }
+        }
     }
 }
