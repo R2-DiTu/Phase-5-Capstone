@@ -11,11 +11,11 @@ pipeline {
             steps {
                
                 // To run Maven on a Windows agent, use
-                bat "git --version"
-                bat "java -version"
-                bat "mvn -version"
-                bat "docker --version"
-                bat "docker-compose --version"
+                sh "git --version"
+                sh "java -version"
+                sh "mvn -version"
+                sh "docker --version"
+                sh "docker-compose --version"
                       
             }
         }
@@ -23,8 +23,8 @@ pipeline {
         stage('Build the Eureka Server'){
             steps {
                 dir("./backend/eureka-server/eureka-server/"){
-                    bat "dir"
-                    bat "mvn clean package"
+                    sh "ls"
+                    sh "mvn clean package"
                 }
             }
         }
@@ -32,8 +32,8 @@ pipeline {
         stage('Build the Login Service App') {
             steps {
                 dir("./backend/Login-app-micro-service/Login-app-micro-service/"){
-                    bat "dir"
-                    bat "mvn clean package"
+                    sh "ls"
+                    sh "mvn clean package"
                 }
             }
         }
@@ -41,8 +41,8 @@ pipeline {
         stage('Build the Movies Microservice App') {
             steps {
                 dir("./backend/movies-micro-service-app/movies-micro-service-app"){
-                    bat "dir"
-                    bat "mvn clean package"
+                    sh "ls"
+                    sh "mvn clean package"
                 }
             }
         }
@@ -50,9 +50,9 @@ pipeline {
         stage('Build the Angular Front End') {
             steps {
                 dir("./frontend/front-end-app"){
-                    bat "dir"
-                    bat "npm install"
-                    bat "ng build"
+                    sh "ls"
+                    sh "npm install"
+                    sh "ng build"
                 }
             }
         }
